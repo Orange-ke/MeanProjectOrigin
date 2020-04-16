@@ -1,0 +1,50 @@
+
+mat-paginator {
+  margin-top: 1rem;
+}
+
+.mat-card-header .mat-card-title {
+  font-size: 90%;
+}
+
+.mat-card-subtitle {
+  color: #555555;
+}
+
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+.info-text {
+  text-align: center;
+}
+
+.card_image {
+  height: 200px;
+}
+
+.image {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  height: 100%;
+}
+
+mat-card {
+  box-sizing: border-box;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  min-height: 400px;
+}
+
+mat-card {
+  flex: 1 0 21%;
+  margin: 5px;
+}

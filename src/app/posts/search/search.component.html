@@ -1,0 +1,58 @@
+<mat-card class="card-with-background">
+  <form [formGroup]="form" (submit)="onSearch()" enctype="multipart/form-data" #radioRef>
+    <div class="form-item" *ngIf="!isGetResult">
+      <button mat-stroked-button type="button" (click)="filePicker.click()">选择照片</button>
+      <input type="file" name="image" #filePicker (change)="onImagePicked($event)" accept="image/gif, image/jpeg, image/png">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" alt="Search Image">
+      <div class="faceFrame_container" *ngIf="facesInfo && facesInfo.length > 1">
+          <div class="face_frame">
+            <div
+              *ngFor="let item of facesInfo, let i = index"
+              class="face_frame_item"
+              [style.top]="item['location']['top'] * faceFrameRadio + 'px'"
+              [style.left]="item['location']['left'] * faceFrameRadio + 'px'"
+              [style.width]="item['location']['width'] * faceFrameRadio + 'px'"
+              [style.height]="item['location']['height'] * faceFrameRadio + 'px'"
+              [style.transform]="'rotateZ('+ item['location']['rotation'] +'deg)'"
+              >
+              <span class="face_index_number">{{ i + 1 }}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="face-info">
+      <div *ngIf="isGetResult  && facesInfo.length > 0">
+        <div class="item-content" *ngFor="let item of facesInfo, let i = index">
+          <div class="face_index" *ngIf="facesInfo && facesInfo.length > 1">{{ '第' + (i + 1) + '个人脸' }}</div>
+          <div class="face_item">
+            <span class="title">与该人脸最接近的是:</span>
+            <span class="name">姓名: {{item['face_info']['name']}}</span>
+            <span class="content">信息: {{item['face_info']['info']}}</span>
+            <span class="similarity">相似度: {{item['face_info']['score'].toFixed(2) + '%'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-item"></div>
+    <button
+      *ngIf="!isGetResult"
+      class="form-footer"
+      [disabled]="isLoading"
+      mat-raised-button
+      color="accent"
+      type="submit">
+      <div class="loader" *ngIf="isLoading"></div>
+      <span *ngIf="!isLoading">查询人脸</span>
+    </button>
+    <button
+      *ngIf="isGetResult"
+      class="form-footer"
+      mat-raised-button
+      color="primary"
+      (click)='clearSearchData()'>
+      查询另一张图片
+    </button>
+  </form>
+</mat-card>

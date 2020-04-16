@@ -1,0 +1,73 @@
+form {
+  text-align: center;
+}
+
+textarea, mat-form-field {
+  width: 100%;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  width: 45%;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  margin: 1rem auto;
+}
+
+.image-preview img {
+  width: 100%;
+}
+
+.compare-result {
+  margin: 15px;
+  text-align: center;
+}
+
+.score {
+  font-size: 2rem;
+  color: #F57C00;
+}
+
+@media screen and (min-width: 600px) {
+  .upload_container {
+    text-align: center;
+    align-content: center;
+    justify-items: center;
+  }
+
+  .upload_container:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .image_upload {
+    display: inline-block;
+    width: 45%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .image_upload_1 {
+    float: left;
+  }
+
+  .image_upload_2 {
+    float: right;
+  }
+
+  .form-item {
+    text-align: center;
+  }
+}

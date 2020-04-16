@@ -1,0 +1,20 @@
+<mat-card class="card-with-background">
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+    <mat-form-field>
+      <input matInput ngModel name="email" type="text" #email="ngModel" required placeholder="邮箱">
+      <mat-error *ngIf="email.invalid">请输入正确的用户名</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput ngModel name="password" type="password" #userPassword="ngModel" required placeholder="密码">
+      <mat-error *ngIf="userPassword.invalid">请输入正确的密码</mat-error>
+    </mat-form-field>
+    <button
+      [disabled]="isLoading"
+      mat-raised-button
+      color="accent"
+      type="submit">
+      <div class="loader" *ngIf="isLoading"></div>
+      <span *ngIf="!isLoading">登陆</span>
+    </button>
+  </form>
+</mat-card>

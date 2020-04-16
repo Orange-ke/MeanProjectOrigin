@@ -1,0 +1,81 @@
+<mat-card class="card-with-background">
+  <form [formGroup]="form" (submit)="onDetect()" enctype="multipart/form-data" #radioRef>
+    <div class="form-item" *ngIf="!isGetResult">
+      <button mat-stroked-button type="button" (click)="filePicker.click()">选择照片</button>
+      <input type="file" name="image" #filePicker (change)="onImagePicked($event)" accept="image/*">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" alt="Detect Image">
+      <div class="faceFrame_container">
+        <div class="face_frame">
+          <div
+            *ngFor="let item of faceInfo, let i = index"
+            class="face_frame_item"
+            [style.top]="item['location']['top'] * faceFrameRadio + 'px'"
+            [style.left]="item['location']['left'] * faceFrameRadio + 'px'"
+            [style.width]="item['location']['width'] * faceFrameRadio + 'px'"
+            [style.height]="item['location']['height'] * faceFrameRadio + 'px'"
+            [style.transform]="'rotateZ('+ item['location']['rotation'] +'deg)'"
+            >
+            <span class="face_index_number">{{ i + 1 }}</span>
+            <div class="beauty_king_wrap" *ngIf="faceInfo.length > 1 && (item['beauty'] === beautyKingScore)">
+              <div class="beauty_king"><span>颜王</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="face-info">
+      <div *ngIf="isGetResult && faceInfo.length > 0">
+        <mat-list-item *ngFor="let item of faceInfo; let i = index">
+          <div class="item-content">
+            <div class="face_index" *ngIf="faceInfo && faceInfo.length > 1">{{ '第' + (i + 1) + '个人脸' }}</div>
+            <div class="face_item">
+              <span class="title">年龄: </span>
+              <span class="content">{{ item['age'] }}</span>
+            </div>
+            <div class="face_item">
+              <span class="title">颜值: </span>
+              <span class="content">{{ item['beauty'] + ' / 100' }}</span>
+            </div>
+            <div class="face_item">
+              <span class="title">性别: </span>
+              <span class="content">{{ item['gender']['type'] + ' / ' + (item['gender']['probability'] * 100).toFixed(2) + '%' }}</span>
+            </div>
+            <div class="face_item">
+              <span class="title">脸型: </span>
+              <span class="content">{{ item['face_shape']['type'] + ' / ' + (item['face_shape']['probability'] *100).toFixed(2) + '%' }}</span>
+            </div>
+            <div class="face_item">
+              <span class="title">表情: </span>
+              <span class="content">{{ item['expression']['type'] + ' / ' + (item['expression']['probability'] *100).toFixed(2) + '%' }}</span>
+            </div>
+            <div class="face_item">
+              <span class="title">情绪: </span>
+              <span class="content">{{ item['emotion']['type'] + ' / ' + (item['emotion']['probability'] *100).toFixed(2) + '%' }}</span>
+            </div>
+          </div>
+        </mat-list-item>
+      </div>
+    </div>
+    <div class="form-item"></div>
+    <button
+      *ngIf="!isGetResult"
+      class="form-footer"
+      [disabled]="isLoading"
+      mat-raised-button
+      color="primary"
+      type="submit">
+      <div class="loader" *ngIf="isLoading"></div>
+      <span *ngIf="!isLoading">检测人脸</span>
+    </button>
+    <button
+      *ngIf="isGetResult"
+      class="form-footer"
+      mat-raised-button
+      color="accent"
+      (click)='clearSearchData()'>
+      检测另一张图片
+    </button>
+  </form>
+</mat-card>

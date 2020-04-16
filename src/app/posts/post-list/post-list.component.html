@@ -1,0 +1,35 @@
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="card-container" *ngIf="posts.length > 0 && !isLoading">
+  <mat-card class="face-card" *ngFor="let post of posts">
+    <mat-card-header>
+      <mat-card-title>FaceToken: {{ post.face_token }}</mat-card-title>
+      <mat-card-subtitle>{{ post.title + '-' }} {{ post.user_id }}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="card_image">
+        <img class="image" mat-card-image [src]="post.imagePath" [alt]="post.title">
+    </div>
+    <mat-card-content>
+      <p>
+        {{ post.content }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="userId === post.creator">
+      <!-- <a mat-button color="primary" [routerLink]="['/edit', post.id]">修改</a> -->
+      <button
+        mat-button
+        color="warn"
+        (click)="onDelete(post.id, {user_id: post.user_id, face_token: post.face_token, imagePath: post.imagePath})"
+        >删除
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<mat-paginator
+  [length]="totalPosts"
+  [pageSize]="postsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangePage($event)"
+  *ngIf="totalPosts > 0"></mat-paginator>
+
+<p class="info-text" *ngIf="totalPosts <= 0 && !isLoading">-暂无人脸数据-</p>

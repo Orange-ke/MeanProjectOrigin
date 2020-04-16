@@ -1,0 +1,26 @@
+
+mat-card {
+  margin: 10% auto 0;
+  width: 45%;
+  display: block;
+  position: relative;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+  mat-card {
+    margin: 30% auto 0;
+    box-sizing: border-box;
+    padding: 10%;
+    width: 90%;
+  }
+}

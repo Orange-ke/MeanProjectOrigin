@@ -1,0 +1,135 @@
+form {
+  text-align: center;
+}
+
+textarea, mat-form-field {
+  width: 100%;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  text-align: center;
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin: 1rem auto;
+}
+
+.faceFrame_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.face_frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.face_frame_item {
+  text-align: left;
+  display: inline-block;
+  position: absolute;
+  border: 1px solid #388E3C;
+}
+
+.face_index_number {
+  color: #388E3C;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+}
+
+.face-info div {
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+.form-item {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.form-footer {
+  width: 45%;
+}
+
+.item-content {
+  position: relative;
+  width: 50%;
+  margin: 10px auto;
+  border: 1px dotted #E64A19;
+  border-radius: 5px;
+}
+
+.beauty_king {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  border-radius: 1px;
+  border: 1px solid #D32F2F;
+  color: #D32F2F;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 600px) {
+
+  .item-content {
+    width: 100%;
+  }
+
+  .image-preview {
+    width: 100%;
+  }
+
+}
+
+.face_index {
+  font-size: .9rem;
+  font-style: italic;
+  text-decoration: underline;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.face_item {
+  text-align: center;
+  padding: 10px 15px;
+}
+
+.title, .name, .content, .similarity {
+  font-size: .9rem;
+  display: block;
+}
+
+.title {
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.name, .content {
+  color: #AFB42B;
+}
+
+.similarity {
+  color: #FF9800;
+}

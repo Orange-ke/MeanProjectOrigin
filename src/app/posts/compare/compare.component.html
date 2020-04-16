@@ -1,0 +1,51 @@
+<mat-card class="card-with-background">
+    <form [formGroup]="form" (submit)="onCompare()" enctype="multipart/form-data">
+      <div class="upload_container">
+        <div class="image_upload_1 image_upload">
+          <div class="form-item" *ngIf="!isGetResult">
+            <button mat-stroked-button type="button" (click)="filePicker1.click()">选择照片1</button>
+            <input type="file" name="image_1" #filePicker1 (change)="onImagePicked($event, 'image_1')" accept="image/gif, image/jpeg, image/png">
+          </div>
+          <div class="image-preview" *ngIf="imagePreview1 !== '' && imagePreview1 && form.get('image_1').valid">
+            <img [src]="imagePreview1" alt="Compare Image 1">
+          </div>
+        </div>
+        <div class="image_upload_2 image_upload">
+          <div class="form-item" *ngIf="!isGetResult">
+            <button mat-stroked-button type="button" (click)="filePicker2.click()">选择照片2</button>
+            <input type="file" name="image_2" #filePicker2 (change)="onImagePicked($event, 'image_2')" accept="image/gif, image/jpeg, image/png">
+          </div>
+          <div class="image-preview" *ngIf="imagePreview2 !== '' && imagePreview2 && form.get('image_2').valid">
+            <img [src]="imagePreview2" alt="Compare Image 2">
+          </div>
+        </div>
+      </div>
+      <div class="face-info">
+        <div *ngIf="isGetResult">
+          <div class="compare-result">
+            <span class="title">相似度: </span>
+            <span class="score">{{ score.toFixed(2) + '%' }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-item"></div>
+      <button
+        *ngIf="!isGetResult"
+        class="form-footer"
+        [disabled]="isLoading"
+        mat-raised-button
+        color="accent"
+        type="submit">
+        <div class="loader" *ngIf="isLoading"></div>
+        <span *ngIf="!isLoading">对比两人人脸</span>
+      </button>
+      <button
+        *ngIf="isGetResult"
+        class="form-footer"
+        mat-raised-button
+        color="primary"
+        (click)='clearCompareData()'>
+        对比另一对人脸
+      </button>
+    </form>
+  </mat-card>

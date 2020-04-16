@@ -1,0 +1,57 @@
+<mat-card class="card-with-background">
+  <form (submit)="onSignup(signupForm)"  #signupForm="ngForm" >
+    <mat-form-field>
+      <input
+        matInput
+        name="email"
+        type="email"
+        ngModel
+        #email="ngModel"
+        required
+        placeholder="邮箱"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      <mat-error *ngIf="email.invalid && (signupForm.submitted || email.touched)">
+        <div *ngIf="email.errors && email?.errors.required">邮箱不能为空</div>
+        <div *ngIf="email.errors && email?.errors.pattern">请输入正确邮箱</div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        name="password"
+        type="password"
+        ngModel
+        #password="ngModel"
+        required
+        pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}"
+        placeholder="密码">
+      <mat-error *ngIf="password.invalid && (signupForm.submitted || password.touched)">
+        <div *ngIf="password.errors && password?.errors.required">密码不能为空</div>
+        <div *ngIf="password.errors && password?.errors.pattern">密码至少包含一个大写字母一个小写字符，长度大于6位</div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        name="assurePassword"
+        type="password"
+        ngModel
+        #assurePassword="ngModel"
+        required
+        pattern="{{ password.value }}"
+        placeholder="请再次输入密码">
+      <mat-error *ngIf="assurePassword.invalid && (signupForm.submitted || assurePassword.touched)">
+        <div *ngIf="assurePassword.errors && assurePassword?.errors.required">不能为空</div>
+        <div *ngIf="assurePassword.errors && assurePassword?.errors.pattern">两次密码不一致</div>
+      </mat-error>
+    </mat-form-field>
+    <button
+      [disabled]="isLoading"
+      mat-raised-button
+      color="primary"
+      type="submit">
+      <div class="loader" *ngIf="isLoading"></div>
+      <span *ngIf="!isLoading">注册</span>
+    </button>
+  </form>
+</mat-card>

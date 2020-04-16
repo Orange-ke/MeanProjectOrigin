@@ -1,0 +1,36 @@
+<app-header (toggleDrawer)="toggleDrawer($event)" [showDrawer]='showDrawer'></app-header>
+<main>
+  <router-outlet></router-outlet>
+  <!-- mask -->
+  <!-- drawer -->
+  <div class="mask" *ngIf="showDrawer" (click)='hideDrawer()'>
+  </div>
+  <div class="drawer" *ngIf="showDrawer">
+    <div class="logo">
+      <img src="../assets/logo.png" alt="logo">
+    </div>
+    <ul (click)='hideDrawer()'>
+      <li *ngIf="isAuth">
+        <a mat-button routerLink="/compare" routerLinkActive="mat-accent">人脸对比</a>
+      </li>
+      <li *ngIf="isAuth">
+        <a mat-button routerLink="/detect" routerLinkActive="mat-accent">检测人脸</a>
+      </li>
+      <li *ngIf="isAuth">
+        <a mat-button routerLink="/search" routerLinkActive="mat-accent">查询</a>
+      </li>
+      <li *ngIf="isAuth">
+        <a mat-button routerLink="/create" routerLinkActive="mat-accent">新建人脸</a>
+      </li>
+      <li *ngIf="!isAuth">
+        <a mat-button routerLink="/signup" routerLinkActive="mat-accent">注册</a>
+      </li>
+      <li *ngIf="!isAuth">
+        <a mat-button routerLink="/login" routerLinkActive="mat-accent">登录</a>
+      </li>
+      <li *ngIf="isAuth">
+        <button mat-button (click)="onLogout()">登出</button>
+      </li>
+      </ul>
+  </div>
+</main>
